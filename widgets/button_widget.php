@@ -47,7 +47,7 @@ class WP_Paypal_Button extends Widget_Base{
 			 'buynow'  => __( 'Buy Now', 'wp-paypal' ),
 			 'cart' => __( 'Add To Cart', 'wp-paypal' ),
 			 'donate' => __( 'Donation', 'wp-paypal' ),
-			 'subscribe' => __( 'Subscribe', 'wp-paypal' )
+			 'subscribe' => __( 'Subscription', 'wp-paypal' )
 		 ],
 	 ]
 	);
@@ -152,7 +152,8 @@ class WP_Paypal_Button extends Widget_Base{
 				'8' => '8',
 				'9' => '9',
 				'10' => '10'
-			]
+			],
+			'condition' => ['paypal_type' => 'buynow']
 		  ]
 		);
 
@@ -187,7 +188,7 @@ class WP_Paypal_Button extends Widget_Base{
 		  [
 			'label' => __( 'Tax', 'wp-paypal' ),
 			'type' => \Elementor\Controls_Manager::TEXT,
-			'placeholder' => '2.99',
+			'placeholder' => '0.00',
 		  ]
 		);
 
@@ -221,7 +222,7 @@ class WP_Paypal_Button extends Widget_Base{
 		  [
 			'label' => __( 'Shipping Cost', 'wp-paypal' ),
 			'type' => \Elementor\Controls_Manager::TEXT,
-			'placeholder' => '0.75',
+			'placeholder' => '0.00',
 			'description' => 'The cost of shipping this item.',
 		  ]
 		);
