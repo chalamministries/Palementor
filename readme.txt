@@ -79,6 +79,9 @@ none
 
 == Changelog ==
 
+= 1.2.3 =
+* Trying new updater
+
 = 1.2.2 =
 * Add button size selector
 
