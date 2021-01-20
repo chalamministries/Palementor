@@ -481,6 +481,8 @@ class WP_Paypal_Button extends Widget_Base{
   protected function render(){
 	$settings = $this->get_settings_for_display();
 
+	$options = "";
+
 	switch($settings['paypal_type']) {
 		case "buynow":
 			$options .= ' amount="'.$settings['paypal_amount'].'"';
@@ -496,41 +498,41 @@ class WP_Paypal_Button extends Widget_Base{
 			break;
 	}
 
-	if($settings['trial_switcher'] == "yes") {
+	if(isset($settings['trial_switcher']) && $settings['trial_switcher'] == "yes") {
 		$options .= ' a1="'.$settings['paypal_a1'].'" p1="'.$settings['paypal_p1'].'" t1="'.$settings['paypal_t1'].'"';
 	}
 
-	if($settings['paypal_button_style'] == "custom") {
+	if(isset($settings['paypal_button_style']) && $settings['paypal_button_style'] == "custom") {
 		$options .= ' button_image="'.$settings['paypal_button_image']['url'].'"';
-	} else if($settings['paypal_button_style'] == "text") {
+	} else if(isset($settings['paypal_button_style']) && $settings['paypal_button_style'] == "text") {
 		$options .= ' button_text="'.$settings['paypal_button_text'].'"';
 	}
 
-	if($settings['paypal_shipping'] != "") {
+	if(isset($settings['paypal_shipping']) && $settings['paypal_shipping'] != "") {
 		$options .= ' shipping="'.$settings['paypal_shipping'].'"';
 	}
 
-	if($settings['paypal_shipping2'] != "") {
+	if(isset($settings['paypal_shipping2']) && $settings['paypal_shipping2'] != "") {
 		$options .= ' shipping2="'.$settings['paypal_shipping2'].'"';
 	}
 
-	if($settings['paypal_return'] != "") {
+	if(isset($settings['paypal_return']) && $settings['paypal_return'] != "") {
 		$options .= ' return="'.$settings['paypal_return'].'"';
 	}
 
-	if($settings['paypal_cancel_return'] != "") {
+	if(isset($settings['paypal_cancel_return']) && $settings['paypal_cancel_return'] != "") {
 		$options .= ' cancel_return="'.$settings['paypal_cancel_return'].'"';
 	}
 
-	if($settings['paypal_tax'] != "") {
+	if(isset($settings['paypal_tax']) && $settings['paypal_tax'] != "") {
 		$options .= ' tax="'.$settings['paypal_tax'].'"';
 	}
 
-	if($settings['paypal_number'] != "") {
+	if(isset($settings['paypal_number']) && $settings['paypal_number'] != "") {
 		$options .= ' number="'.$settings['paypal_number'].'"';
 	}
 
-	if($settings['paypal_quantity'] > 0) {
+	if(isset($settings['paypal_quantity']) && $settings['paypal_quantity'] > 0) {
 		$options .= ' quantity="'.$settings['paypal_quantity'].'"';
 	} else {
 		if($settings['paypal_type'] == "buynow") {
