@@ -106,7 +106,7 @@ class WP_PAYPAL
             'requires' => '3.0', // which version of WordPress does your plugin require?
             'tested' => '3.3', // which version of WordPress is your plugin tested up to?
             'readme' => 'readme.txt', // which file to use as the readme for the version number
-            'access_token' => 'b948586a88ebfb2da886dd17bc293543cc8842c4', // Access private repositories by authorizing under Plugins > GitHub Updates when this example plugin is installed
+            'access_token' => '58eb460e13d855807d762307586acd4db6782ca3', // Access private repositories by authorizing under Plugins > GitHub Updates when this example plugin is installed
           );
             new WP_GitHub_Updater($config);
         }
