@@ -78,6 +78,9 @@ none
 
 == Changelog ==
 
+= 1.2.2 =
+* Add button size selector
+
 = 1.2.1 =
 * Added checks for if options are set
 
