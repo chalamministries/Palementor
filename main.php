@@ -86,29 +86,17 @@ class WP_PAYPAL
         }
     }
 
-//     function activate_handler() {
-//         add_option('wp_paypal_plugin_version', $this->plugin_version);
-//         add_option('wp_paypal_email', get_bloginfo('admin_email'));
-//         add_option('wp_paypal_currency_code', 'USD');
-//     }
-//
     public function check_upgrade()
     {
         if (is_admin()) {
-            $config = array(
-            'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-            'proper_folder_name' => 'Palementor', // this is the name of the folder your plugin lives in
-            'api_url' => 'https://api.github.com/repos/chalamministries/Palementor', // the GitHub API url of your GitHub repo
-            'raw_url' => 'https://raw.github.com/chalamministries/Palementor/master', // the GitHub raw url of your GitHub repo
-            'github_url' => 'https://github.com/chalamministries/Palementor', // the GitHub url of your GitHub repo
-            'zip_url' => 'https://github.com/chalamministries/Palementor/zipball/master', // the zip url of the GitHub repo
-            'sslverify' => true, // whether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
-            'requires' => '3.0', // which version of WordPress does your plugin require?
-            'tested' => '3.3', // which version of WordPress is your plugin tested up to?
-            'readme' => 'readme.txt', // which file to use as the readme for the version number
-            'access_token' => '58eb460e13d855807d762307586acd4db6782ca3', // Access private repositories by authorizing under Plugins > GitHub Updates when this example plugin is installed
-          );
-            new WP_GitHub_Updater($config);
+            $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                'https://github.com/chalamministries/Palementor/',
+                __FILE__,
+                'palementor'
+            );
+
+            //Optional: If you're using a private repository, specify the access token like this:
+            $myUpdateChecker->setAuthentication('58eb460e13d855807d762307586acd4db6782ca3');
         }
     }
 
@@ -911,28 +899,22 @@ function wp_paypal_get_subscribe_button($atts)
 
 function wp_paypal_generate_submit($atts, $default_image)
 {
-    $button_code = "";
-    $size = "";
-    if (isset($atts['size'])) {
-        $size = $atts['size'];
-    }
-
     if ($atts['style'] == "default") {
-        $button_code .= '<input type="image" src="'.$default_image.'" class="'.$size.'" border="0" name="submit">';
+        $button_code .= '<input type="image" src="'.$default_image.'" border="0" name="submit">';
     }
     if ($atts['style'] == "custom") {
         if (isset($atts['button_image']) && filter_var($atts['button_image'], FILTER_VALIDATE_URL)) {
             $button_image_url = esc_url($atts['button_image']);
-            $button_code .= '<input type="image" src="'.$button_image_url.'" class="'.$size.'" border="0" name="submit">';
+            $button_code .= '<input type="image" src="'.$button_image_url.'" border="0" name="submit">';
         } else {
-            $button_code .= '<input type="image" src="'.$default_image.'" class="'.$size.'" border="0" name="submit">';
+            $button_code .= '<input type="image" src="'.$default_image.'" border="0" name="submit">';
         }
     }
     if ($atts['style'] == "text") {
         if (isset($atts['button_text'])) {
-            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button '.$size.'" value="'.$atts['button_text'].'">';
+            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button" value="'.$atts['button_text'].'">';
         } else {
-            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button '.$size.'" value="Buy Now">';
+            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button" value="Buy Now">';
         }
     }
     return $button_code;
