@@ -4,10 +4,10 @@ Donate link: https://wphowto.net/
 Tags: paypal, cart, checkout, donation, e-commerce
 Requires at least: 5.3
 Tested up to: 5.6
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-~Current Version:1.2.3~
+
 
 Easily accept payment in WordPress by adding a PayPal button to your website. Add PayPal Buy Now, Add to Cart, Subscription or Donation button.
 
@@ -78,6 +78,10 @@ Yes.
 none
 
 == Changelog ==
+
+= 1.2.4 =
+* Rearrange of some code
+* Tweaked Button size selector
 
 = 1.2.3 =
 * Trying new updater

@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Palementor
-  Version: 1.2.3
+  Version: 1.2.4
   Plugin URI: https://github.com/chalamministries/Palementor
   Author: chalamministries
   Author URI: https://github.com/chalamministries
@@ -10,6 +10,8 @@
   Domain Path: /languages
  */
 
+include_once('updater.php');
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -17,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 class WP_PAYPAL
 {
-    public $plugin_version = '1.2.3';
+    public $plugin_version = '1.2.4';
     public $plugin_url;
     public $plugin_path;
 
@@ -50,7 +52,6 @@ class WP_PAYPAL
         include_once('wp-paypal-order.php');
         include_once('paypal-ipn.php');
         include_once('widgets/elementor.php');
-        include_once('updater.php');
     }
 
     public function loader_operations()
@@ -899,26 +900,33 @@ function wp_paypal_get_subscribe_button($atts)
 
 function wp_paypal_generate_submit($atts, $default_image)
 {
+    $button_code = "";
+    $size = "";
+    if (isset($atts['size'])) {
+        $size = "elementor-button " . $atts['size'];
+    }
+
     if ($atts['style'] == "default") {
-        $button_code .= '<input type="image" src="'.$default_image.'" border="0" name="submit">';
+        $button_code .= '<input type="image" src="'.$default_image.'" class="'.$size.'" border="0" name="submit">';
     }
     if ($atts['style'] == "custom") {
         if (isset($atts['button_image']) && filter_var($atts['button_image'], FILTER_VALIDATE_URL)) {
             $button_image_url = esc_url($atts['button_image']);
-            $button_code .= '<input type="image" src="'.$button_image_url.'" border="0" name="submit">';
+            $button_code .= '<input type="image" src="'.$button_image_url.'" class="'.$size.'" border="0" name="submit">';
         } else {
-            $button_code .= '<input type="image" src="'.$default_image.'" border="0" name="submit">';
+            $button_code .= '<input type="image" src="'.$default_image.'" class="'.$size.'" border="0" name="submit">';
         }
     }
     if ($atts['style'] == "text") {
         if (isset($atts['button_text'])) {
-            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button" value="'.$atts['button_text'].'">';
+            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button '.$size.'" value="'.$atts['button_text'].'">';
         } else {
-            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button" value="Buy Now">';
+            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button '.$size.'" value="Buy Now">';
         }
     }
     return $button_code;
 }
+
 
 function wp_paypal_debug_log($msg, $success, $end = false)
 {
