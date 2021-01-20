@@ -911,22 +911,28 @@ function wp_paypal_get_subscribe_button($atts)
 
 function wp_paypal_generate_submit($atts, $default_image)
 {
+    $button_code = "";
+    $size = "";
+    if (isset($atts['size'])) {
+        $size = $atts['size'];
+    }
+
     if ($atts['style'] == "default") {
-        $button_code .= '<input type="image" src="'.$default_image.'" border="0" name="submit">';
+        $button_code .= '<input type="image" src="'.$default_image.'" class="'.$size.'" border="0" name="submit">';
     }
     if ($atts['style'] == "custom") {
         if (isset($atts['button_image']) && filter_var($atts['button_image'], FILTER_VALIDATE_URL)) {
             $button_image_url = esc_url($atts['button_image']);
-            $button_code .= '<input type="image" src="'.$button_image_url.'" border="0" name="submit">';
+            $button_code .= '<input type="image" src="'.$button_image_url.'" class="'.$size.'" border="0" name="submit">';
         } else {
-            $button_code .= '<input type="image" src="'.$default_image.'" border="0" name="submit">';
+            $button_code .= '<input type="image" src="'.$default_image.'" class="'.$size.'" border="0" name="submit">';
         }
     }
     if ($atts['style'] == "text") {
         if (isset($atts['button_text'])) {
-            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button" value="'.$atts['button_text'].'">';
+            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button '.$size.'" value="'.$atts['button_text'].'">';
         } else {
-            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button" value="Buy Now">';
+            $button_code .= '<input type="submit" border="0" name="submit" class="paypal_custom_button '.$size.'" value="Buy Now">';
         }
     }
     return $button_code;
