@@ -2,9 +2,9 @@
 /*
   Plugin Name: Palementor
   Version: 1.0
-  Plugin URI: https://wphowto.net/wordpress-paypal-plugin-732
+  Plugin URI: https://github.com/chalamministries/Palementor
   Author: chalamministries
-  Author URI: https://wphowto.net/
+  Author URI: https://github.com/chalamministries
   Description: Easily create Paypal buttons with Elementor
   Text Domain: wp-paypal
   Domain Path: /languages
