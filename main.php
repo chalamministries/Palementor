@@ -14,17 +14,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-if (! class_exists('Smashing_Updater')) {
-    include_once(plugin_dir_path(__FILE__) . 'updater.php');
-}
-
-$updater = new Smashing_Updater(__FILE__);
-$updater->set_username('chalamministries');
-$updater->set_repository('Palementor');
-/*
-  $updater->authorize( 'b948586a88ebfb2da886dd17bc293543cc8842c4' ); // Your auth code goes here for private repos
-*/
-$updater->initialize();
 
 class WP_PAYPAL
 {
@@ -61,6 +50,7 @@ class WP_PAYPAL
         include_once('wp-paypal-order.php');
         include_once('paypal-ipn.php');
         include_once('widgets/elementor.php');
+        include_once('updater.php');
     }
 
     public function loader_operations()
@@ -83,7 +73,7 @@ class WP_PAYPAL
     public function plugins_loaded_handler()
     {  //Runs when plugins_loaded action gets fired
         load_plugin_textdomain('wp-paypal', false, plugin_basename(dirname(__FILE__)) . '/languages');
-        // $this->check_upgrade();
+        $this->check_upgrade();
     }
 
     public function admin_notice()
@@ -102,15 +92,25 @@ class WP_PAYPAL
 //         add_option('wp_paypal_currency_code', 'USD');
 //     }
 //
-//     function check_upgrade() {
-//         if (is_admin()) {
-//             $plugin_version = get_option('wp_paypal_plugin_version');
-//             if (!isset($plugin_version) || $plugin_version != $this->plugin_version) {
-//                 $this->activate_handler();
-//                 update_option('wp_paypal_plugin_version', $this->plugin_version);
-//             }
-//         }
-//     }
+    public function check_upgrade()
+    {
+        if (is_admin()) {
+            $config = array(
+            'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
+            'proper_folder_name' => 'Palementor', // this is the name of the folder your plugin lives in
+            'api_url' => 'https://api.github.com/repos/chalamministries/Palementor', // the GitHub API url of your GitHub repo
+            'raw_url' => 'https://raw.github.com/chalamministries/Palementor/master', // the GitHub raw url of your GitHub repo
+            'github_url' => 'https://github.com/chalamministries/Palementor', // the GitHub url of your GitHub repo
+            'zip_url' => 'https://github.com/chalamministries/Palementor/zipball/master', // the zip url of the GitHub repo
+            'sslverify' => true, // whether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
+            'requires' => '3.0', // which version of WordPress does your plugin require?
+            'tested' => '3.3', // which version of WordPress is your plugin tested up to?
+            'readme' => 'README.txt', // which file to use as the readme for the version number
+            'access_token' => 'b948586a88ebfb2da886dd17bc293543cc8842c4', // Access private repositories by authorizing under Plugins > GitHub Updates when this example plugin is installed
+          );
+            new WP_GitHub_Updater($config);
+        }
+    }
 
     public function plugin_init()
     {
