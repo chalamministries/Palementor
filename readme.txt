@@ -78,6 +78,9 @@ none
 
 == Changelog ==
 
+= 1.2.1 =
+* Added checks for if options are set
+
 = 1.2 =
 * Updated readme. Fixed Quantity Field
 
