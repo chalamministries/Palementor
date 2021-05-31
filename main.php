@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Palementor
-  Version: 1.2.5
+  Version: 1.3
   Plugin URI: https://github.com/chalamministries/Palementor
   Author: chalamministries
   Author URI: https://github.com/chalamministries
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 class WP_PAYPAL
 {
-    public $plugin_version = '1.2.5';
+    public $plugin_version = '1.3';
     public $plugin_url;
     public $plugin_path;
 
@@ -97,7 +97,7 @@ class WP_PAYPAL
             );
 
             //Optional: If you're using a private repository, specify the access token like this:
-            $myUpdateChecker->setAuthentication('58eb460e13d855807d762307586acd4db6782ca3');
+            //$myUpdateChecker->setAuthentication('58eb460e13d855807d762307586acd4db6782ca3');
         }
     }
 
