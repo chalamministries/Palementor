@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Palementor
-  Version: 1.2.4
+  Version: 1.3
   Plugin URI: https://github.com/chalamministries/Palementor
   Author: chalamministries
   Author URI: https://github.com/chalamministries
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 class WP_PAYPAL
 {
-    public $plugin_version = '1.2.4';
+    public $plugin_version = '1.3';
     public $plugin_url;
     public $plugin_path;
 

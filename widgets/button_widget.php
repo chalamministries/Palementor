@@ -477,8 +477,8 @@ class WP_Paypal_Button extends Widget_Base
             'label' => __('Text Color', 'wp-paypal'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'scheme' => [
-                'type' => \Elementor\Scheme_Color::get_type(),
-                'value' => \Elementor\Scheme_Color::COLOR_1,
+                'type' => Elementor\Core\Schemes\Color::get_type(),
+                'value' => Elementor\Core\Schemes\Color::COLOR_1,
             ],
             'selectors' => [
                 '{{WRAPPER}} .paypal_custom_button' => 'color: {{VALUE}}',
